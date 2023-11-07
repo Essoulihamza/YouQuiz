@@ -23,8 +23,9 @@ public class SubjectServiceImpl implements SubjectService  {
 
     @Override
     public SubjectDto create(SubjectDto subjectDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        var newSubjectEntity = subjectMapper.mapFrom(subjectDto);
+        var createdSubjectDto = subjectMapper.mapTo(subjectRepository.save(newSubjectEntity));
+        return createdSubjectDto;
     }
 
     @Override
