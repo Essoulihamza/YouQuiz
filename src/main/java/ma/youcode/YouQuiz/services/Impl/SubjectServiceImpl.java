@@ -41,9 +41,8 @@ public class SubjectServiceImpl implements SubjectService  {
     }
 
     @Override
-    public boolean delete(Long subjectId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public void delete(Long subjectId) {
+        subjectRepository.deleteById(subjectId);
     }
 
     @Override
@@ -59,11 +58,7 @@ public class SubjectServiceImpl implements SubjectService  {
 
     @Override
     public void deleteAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
+        subjectRepository.deleteAll();
     }
-
-
-    
 
 }

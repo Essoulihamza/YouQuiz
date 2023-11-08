@@ -41,4 +41,7 @@ public class SubjectEntity {
     @OneToMany(mappedBy = "parentSubject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<SubjectEntity> childrenSubjects;
 
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<QuestionEntity> questions;
+
 }

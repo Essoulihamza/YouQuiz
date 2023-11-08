@@ -118,4 +118,44 @@ public class SubjectControllerIntegrationTests {
         );
     }
 
+    @Test
+    void deleteMethodReturnsHttp204WhenSubjectIsNotExist() throws Exception {
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.delete("/subjects/99")
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
+    @Test
+    void deleteMethodReturnsHttp204WhenSubjectIsExist() throws Exception {
+        var subjectDto = TestDataUtil.createTestSubjectDto();
+        var savedSubject = subjectService.save(subjectDto);
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.delete("/subjects/" + savedSubject.getId())
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
+    @Test
+    void deleteAllMethodReturnsHttp204WhenNoSubjectIsExist() throws Exception {
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.delete("/subjects")
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
+    @Test
+    void deleteAllMethodReturnsHttp204WhenSubjectsIsExist() throws Exception {
+        var subjectDto = TestDataUtil.createTestSubjectDto();
+        subjectService.save(subjectDto);
+        
+        mockMvc.perform(
+            MockMvcRequestBuilders.delete("/subjects")
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
 }
