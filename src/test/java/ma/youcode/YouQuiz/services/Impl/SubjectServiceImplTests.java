@@ -49,7 +49,7 @@ public class SubjectServiceImplTests {
         when(subjectMapperMock.mapTo(subjectEntityWithId)).thenReturn(subjectDtoWithId);
 
         // act 
-        var result = underTest.create(subjectDto);
+        var result = underTest.save(subjectDto);
 
         // Assert
         assertThat(result).isEqualTo(subjectDtoWithId);
@@ -64,6 +64,7 @@ public class SubjectServiceImplTests {
     void readMethodReturnsTheSubjectsList() {
         
         // Arrange 
+        // ---Dummy
         var subjectDtoWithId = TestDataUtil.createTestSubjectDtoWithId();
         var subjectEntityWithId = TestDataUtil.createTestSubjectEntityWithId();
         var subjectEntityList = new ArrayList<SubjectEntity>();
@@ -78,7 +79,7 @@ public class SubjectServiceImplTests {
         when(subjectMapperMock.mapTo(any(SubjectEntity.class))).thenReturn(subjectDtoWithId);
 
         // act 
-        List<SubjectDto> result = underTest.read();
+        List<SubjectDto> result = underTest.getAll();
 
         // Assert
         assertThat(result).isEqualTo(subjectDtoList);
@@ -86,6 +87,31 @@ public class SubjectServiceImplTests {
         // ---Verify
         verify(subjectRepositoryMock).findAll();
         verify(subjectMapperMock, times(2)).mapTo(any(SubjectEntity.class));
+
+    }
+
+    @Test
+    void updateMethodReturnsTheUpdatedSubject() {
+
+        // Arrange
+        // ---Dummy
+        var subjectDtoWithId = TestDataUtil.createTestSubjectDtoWithId();
+        var subjectEntityWithId = TestDataUtil.createTestSubjectEntityWithId();
+        // ---Stub
+        when(subjectMapperMock.mapFrom(subjectDtoWithId)).thenReturn(subjectEntityWithId);
+        when(subjectRepositoryMock.save(subjectEntityWithId)).thenReturn(subjectEntityWithId);
+        when(subjectMapperMock.mapTo(subjectEntityWithId)).thenReturn(subjectDtoWithId);
+        
+        // Act
+        var result = underTest.update(subjectDtoWithId);
+
+        // Assert
+        assertThat(result).isEqualTo(subjectDtoWithId);
+
+        // ---Verify
+        verify(subjectMapperMock).mapFrom(subjectDtoWithId);
+        verify(subjectRepositoryMock).save(subjectEntityWithId);
+        verify(subjectMapperMock).mapTo(subjectEntityWithId);
 
     }
 

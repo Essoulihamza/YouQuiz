@@ -38,7 +38,7 @@ public class SubjectEntity {
     @JoinColumn(name = "parent_Subject_id")
     private SubjectEntity parentSubject;
 
-    @OneToMany(mappedBy = "parentSubject", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parentSubject", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<SubjectEntity> childrenSubjects;
 
 }

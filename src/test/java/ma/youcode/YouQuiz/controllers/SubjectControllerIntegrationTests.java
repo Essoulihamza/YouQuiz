@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ma.youcode.YouQuiz.TestDataUtil;
+import ma.youcode.YouQuiz.services.SubjectService;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -20,12 +21,14 @@ import ma.youcode.YouQuiz.TestDataUtil;
 public class SubjectControllerIntegrationTests {
     
     private MockMvc mockMvc;
+    private SubjectService subjectService;
 
     private ObjectMapper objectMapper;
 
     @Autowired
-    public SubjectControllerIntegrationTests(MockMvc mockMvc) {
+    public SubjectControllerIntegrationTests(MockMvc mockMvc, SubjectService subjectService) {
         this.mockMvc = mockMvc;
+        this.subjectService = subjectService;
         objectMapper = new ObjectMapper();
     }
 
@@ -69,4 +72,29 @@ public class SubjectControllerIntegrationTests {
             MockMvcResultMatchers.status().isOk()
         );
     }
+
+    @Test
+    void updateMethodReturnsHttp404NotFoundWhenNoTheSubjectIsNotExist() throws Exception {
+
+        var subjectDto = TestDataUtil.createTestSubjectDto();
+        var subjectJson = objectMapper.writeValueAsString(subjectDto);
+        mockMvc.perform(
+            MockMvcRequestBuilders.put("/subjects/99")
+                                  .contentType(MediaType.APPLICATION_JSON)
+                                  .content(subjectJson)
+        ).andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    void updateMethodReturnsHttp200OkWhenSubjectIsExist() throws Exception {
+        var subjectDto = TestDataUtil.createTestSubjectDtoWithId();
+        var savedSubject = subjectService.save(subjectDto);
+        var subjectJson = objectMapper.writeValueAsString(subjectDto);
+        mockMvc.perform(
+            MockMvcRequestBuilders.put("/subjects/" + savedSubject.getId())
+                                  .contentType(MediaType.APPLICATION_JSON)
+                                  .content(subjectJson)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+    
 }

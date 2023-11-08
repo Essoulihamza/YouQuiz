@@ -23,35 +23,47 @@ public class SubjectServiceImpl implements SubjectService  {
     
 
     @Override
-    public SubjectDto create(SubjectDto subjectDto) {
+    public SubjectDto save(SubjectDto subjectDto) {
         var newSubjectEntity = subjectMapper.mapFrom(subjectDto);
         var createdSubjectDto = subjectMapper.mapTo(subjectRepository.save(newSubjectEntity));
         return createdSubjectDto;
     }
 
     @Override
-    public List<SubjectDto> read() {
+    public List<SubjectDto> getAll() {
         var subjects = subjectRepository.findAll();
         return subjects.stream().map(subjectMapper::mapTo).collect(Collectors.toList());
     }
 
     @Override
-    public SubjectDto update(SubjectDto subjectDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public SubjectDto update(SubjectDto subjectDtoToUpdate) {
+        return save(subjectDtoToUpdate);
     }
 
     @Override
-    public Boolean delete(Long SubjectId) {
+    public boolean delete(Long subjectId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
     @Override
-    public SubjectDto find(Long SubjectId) {
+    public SubjectDto find(Long subjectId) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'find'");
     }
+
+    @Override
+    public boolean isExist(Long subjectId) {
+        return subjectRepository.existsById(subjectId);        
+    }
+
+    @Override
+    public void deleteAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
+    }
+
+
     
 
 }

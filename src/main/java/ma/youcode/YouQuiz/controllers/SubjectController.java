@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,12 +26,23 @@ public class SubjectController {
 
     @PostMapping
     public ResponseEntity<SubjectDto> createSubject(@RequestBody SubjectDto newSubject) {
-        SubjectDto createdSubject = subjectService.create(newSubject);
+        SubjectDto createdSubject = subjectService.save(newSubject);
         return new ResponseEntity<>(createdSubject, HttpStatus.CREATED);
     }
 
     @GetMapping
     public List<SubjectDto> getSubjects() {
-        return subjectService.read();
+        return subjectService.getAll();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SubjectDto> updateSubject(
+            @PathVariable("id") Long id,
+            @RequestBody SubjectDto subjectDtoToUpdate) {
+
+        if(!subjectService.isExist(id))
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        var updatedSubject = subjectService.update(subjectDtoToUpdate);
+         return new ResponseEntity<>(updatedSubject ,HttpStatus.OK);
     }
 }
