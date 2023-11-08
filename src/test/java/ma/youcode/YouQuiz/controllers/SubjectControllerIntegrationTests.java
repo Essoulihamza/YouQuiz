@@ -96,5 +96,26 @@ public class SubjectControllerIntegrationTests {
                                   .content(subjectJson)
         ).andExpect(MockMvcResultMatchers.status().isOk());
     }
-    
+
+    @Test
+    void updateMethodisUpdatingTheSubjectAndReturnsIt() throws Exception {
+        var subjectDto = TestDataUtil.createTestSubjectDtoWithId();
+        var savedSubject = subjectService.save(subjectDto);
+        var updatedSubject = TestDataUtil.createTestSubjectEntity();
+        updatedSubject.setId(savedSubject.getId());
+        updatedSubject.setTitle("title");
+
+        var updatedSubjectJson = objectMapper.writeValueAsString(updatedSubject);
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.put("/subjects/" + updatedSubject.getId())
+                                  .contentType(MediaType.APPLICATION_JSON)
+                                  .content(updatedSubjectJson)
+        ).andExpect(
+            MockMvcResultMatchers.jsonPath("$.id").value(updatedSubject.getId())
+        ).andExpect(
+            MockMvcResultMatchers.jsonPath("$.title").value(updatedSubject.getTitle())
+        );
+    }
+
 }
