@@ -1,6 +1,7 @@
 package ma.youcode.YouQuiz.services.Impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -30,8 +31,8 @@ public class SubjectServiceImpl implements SubjectService  {
 
     @Override
     public List<SubjectDto> read() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'read'");
+        var subjects = subjectRepository.findAll();
+        return subjects.stream().map(subjectMapper::mapTo).collect(Collectors.toList());
     }
 
     @Override

@@ -59,4 +59,14 @@ public class SubjectControllerIntegrationTests {
         );
     }
 
+    @Test
+    void getAllMethodReturnsHttp200Ok() throws Exception {
+        
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/subjects")
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(
+            MockMvcResultMatchers.status().isOk()
+        );
+    }
 }
