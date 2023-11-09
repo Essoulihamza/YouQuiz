@@ -34,12 +34,13 @@ public class LevelServiceImpl implements LevelService {
                          .map(mapper::mapTo)
                          .collect(Collectors.toList());
     }
-    
+
     @Override
     public LevelDto update(Integer id, LevelDto levelDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        levelDto.setId(id);
+        return save(levelDto);
     }
+
     @Override
     public void delete(Integer identifier) {
         // TODO Auto-generated method stub
@@ -50,11 +51,12 @@ public class LevelServiceImpl implements LevelService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'find'");
     }
+
     @Override
     public boolean isExist(Integer identifier) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isExist'");
+        return repository.existsById(identifier);
     }
+
     @Override
     public void deleteAll() {
         // TODO Auto-generated method stub

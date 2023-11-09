@@ -34,6 +34,6 @@ public class LevelEntity {
     private Double maxPoint;
     private Double minPoint; 
 
-    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL)
     private Set<QuestionEntity> questions;
 }
