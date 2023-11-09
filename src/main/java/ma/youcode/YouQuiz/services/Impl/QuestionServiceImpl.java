@@ -16,14 +16,16 @@ import ma.youcode.YouQuiz.services.QuestionService;
 @Service
 public class QuestionServiceImpl implements QuestionService {
     
-    private final QuestionRepository questionRepository;
-    private final Mapper<QuestionEntity, QuestionDto> questionMapper;
+    private final QuestionRepository repository;
+    private final Mapper<QuestionEntity, QuestionDto> mapper;
 
     @Override
     public QuestionDto save(QuestionDto questionDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        var questionEntity = mapper.mapFrom(questionDto);
+        var savedEntity = repository.save(questionEntity);
+        return mapper.mapTo(savedEntity);
     }
+    
     @Override
     public List<QuestionDto> getAll() {
         // TODO Auto-generated method stub
