@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -73,6 +74,37 @@ public class QuestionServiceImplTests {
     @Test
     void updateMethodReturnsTheUpdatedQuestion() {
         this.saveMethodReturnsTheSavedEntity();;
+    }
+
+    @Test
+    void findMethodReturnsNullWhenQuestionIsNotExist() {
+        
+        when(repository.findById(99L)).thenReturn(Optional.empty());
+
+        var result = underTest.find(99L);
+
+        assertThat(result).isNull();
+
+        verify(repository).findById(99L);
+    }
+
+    @Test 
+    void findMethodReturnsTheFoundedQuestionWhenItIsExist() {
+
+        var questionDto = TestDataUtil.getTestQuestionDto();
+        var questionEntity = TestDataUtil.getTestQuestionEntity();
+        questionDto.setId(1L);
+        questionEntity.setId(1L);
+
+        when(repository.findById(questionDto.getId())).thenReturn(Optional.of(questionEntity));
+        when(mapper.mapTo(questionEntity)).thenReturn(questionDto);
+
+        var result = underTest.find(1L);
+
+        assertThat(result).isEqualTo(questionDto);
+
+        verify(repository).findById(1L);
+        verify(mapper).mapTo(questionEntity);
     }
 
 }

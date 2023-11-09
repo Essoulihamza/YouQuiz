@@ -45,11 +45,16 @@ public class QuestionServiceImpl implements QuestionService {
     public void delete(Long identifier) {
         repository.deleteById(identifier);
     }
+    
     @Override
     public QuestionDto find(Long identifier) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find'");
+        var optionalQuestion = repository.findById(identifier);
+        return optionalQuestion.isPresent() ?
+            mapper.mapTo(optionalQuestion.get())
+        :
+            null; 
     }
+
     @Override
     public boolean isExist(Long identifier) {
         return repository.existsById(identifier);

@@ -36,6 +36,14 @@ public class QuestionController {
         return questionService.getAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<QuestionDto> find(@PathVariable("id") Long id) {
+        if(!questionService.isExist(id))
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        var founded = questionService.find(id);
+        return new ResponseEntity<>(founded, HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<QuestionDto> update(@PathVariable("id") Long id, @RequestBody QuestionDto question) {
         if(!questionService.isExist(id))

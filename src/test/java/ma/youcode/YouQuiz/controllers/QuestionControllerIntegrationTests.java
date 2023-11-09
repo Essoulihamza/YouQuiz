@@ -146,5 +146,40 @@ public class QuestionControllerIntegrationTests {
                                   .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.status().isNoContent());
     }
-    
+
+    @Test
+    void findMethodReturnsHttp404NotFoundWhenQuestionIsNotExist() throws Exception {
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.get(END_PONT + '/' + 99)
+                                  .contentType(MediaType.APPLICATION_JSON))
+                                  .andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    void findMethodReturnsHttp200OkWhenQuestionIsExist() throws Exception {
+
+        var questionDto = TestDataUtil.getTestQuestionDto();
+        var savedLevel = questionService.save(questionDto);
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.get(END_PONT + '/' + savedLevel.getId())
+                                  .contentType(MediaType.APPLICATION_JSON))
+                                  .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void findMethodReturnsTheFoundedLevelWhenExist() throws Exception {
+
+        var questionDto = TestDataUtil.getTestQuestionDto();
+        var savedLevel = questionService.save(questionDto);
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.get(END_PONT + '/' + savedLevel.getId())
+                                  .contentType(MediaType.APPLICATION_JSON))
+                                  .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(savedLevel.getId()))
+                                  .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(questionDto.getContent()))
+                                  .andExpect(MockMvcResultMatchers.jsonPath("$.questionType").value(questionDto.getQuestionType().name()));
+    }
+
 }
