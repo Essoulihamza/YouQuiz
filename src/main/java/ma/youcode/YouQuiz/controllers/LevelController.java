@@ -36,6 +36,14 @@ public class LevelController {
         return levelService.getAll();
     } 
 
+    @GetMapping("/{id}")
+    public ResponseEntity<LevelDto> find(@PathVariable("id") Integer id) {
+        var foundedLevel = levelService.find(id);
+        if (foundedLevel == null) 
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(foundedLevel, HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<LevelDto> update(@PathVariable("id") Integer id, @RequestBody LevelDto level) {
         if(!levelService.isExist(id))
@@ -55,5 +63,5 @@ public class LevelController {
         levelService.deleteAll();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    
+
 }

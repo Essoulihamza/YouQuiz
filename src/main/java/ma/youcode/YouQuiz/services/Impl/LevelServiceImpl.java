@@ -48,8 +48,11 @@ public class LevelServiceImpl implements LevelService {
 
     @Override
     public LevelDto find(Integer identifier) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find'");
+        var optionalEntity = repository.findById(identifier);
+        return optionalEntity.isPresent() ?
+            mapper.mapTo(optionalEntity.get())
+        :
+            null;
     }
 
     @Override
@@ -61,7 +64,7 @@ public class LevelServiceImpl implements LevelService {
     public void deleteAll() {
         repository.deleteAll();
     }
-    
+
     @Override
     public LevelDto partialUpdate(Integer identifier, LevelDto dto) {
         // TODO Auto-generated method stub
