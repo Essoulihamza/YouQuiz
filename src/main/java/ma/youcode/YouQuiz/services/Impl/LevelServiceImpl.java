@@ -1,6 +1,7 @@
 package ma.youcode.YouQuiz.services.Impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,12 @@ public class LevelServiceImpl implements LevelService {
     
     @Override
     public List<LevelDto> getAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'read'");
+        return repository.findAll()
+                         .stream()
+                         .map(mapper::mapTo)
+                         .collect(Collectors.toList());
     }
+    
     @Override
     public LevelDto update(Integer id, LevelDto levelDto) {
         // TODO Auto-generated method stub
