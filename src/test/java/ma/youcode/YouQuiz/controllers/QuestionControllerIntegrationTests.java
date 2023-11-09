@@ -58,6 +58,13 @@ public class QuestionControllerIntegrationTests {
         .andExpect(MockMvcResultMatchers.jsonPath("$.questionType").value(questionDto.getQuestionType().name()));
     }
 
+    @Test
+    void getAllMethodReturns200Ok() throws Exception {
 
+        mockMvc.perform(
+            MockMvcRequestBuilders.get(END_PONT)
+                                  .contentType(MediaType.APPLICATION_JSON))
+                                  .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 
 }

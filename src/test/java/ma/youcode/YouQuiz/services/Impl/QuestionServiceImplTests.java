@@ -1,8 +1,12 @@
 package ma.youcode.YouQuiz.services.Impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,6 +45,29 @@ public class QuestionServiceImplTests {
         verify(mapper).mapFrom(questionDto);
         verify(repository).save(questionEntity);
         verify(mapper).mapTo(questionEntity);
+    }
+
+    @Test
+    void getAllMethodReturnsLevelsList() {
+        
+        var questionDto = TestDataUtil.getTestQuestionDto();
+        var questionEntity = TestDataUtil.getTestQuestionEntity();
+        var questionDtoList = new ArrayList<QuestionDto>();
+        var questionEntityList = new ArrayList<QuestionEntity>();
+        questionDtoList.add(questionDto);
+        questionDtoList.add(questionDto);
+        questionEntityList.add(questionEntity);
+        questionEntityList.add(questionEntity);
+
+        when(repository.findAll()).thenReturn(questionEntityList);
+        when(mapper.mapTo(questionEntity)).thenReturn(questionDto);
+
+        var result = underTest.getAll();
+
+        assertThat(result).isEqualTo(questionDtoList);
+
+        verify(repository).findAll();
+        verify(mapper, times(questionEntityList.size())).mapTo(any(QuestionEntity.class));
     }
 
 }
