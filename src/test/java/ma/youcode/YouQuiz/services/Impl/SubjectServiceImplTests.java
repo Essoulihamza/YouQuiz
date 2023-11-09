@@ -154,6 +154,31 @@ public class SubjectServiceImplTests {
         verify(subjectMapperMock).mapTo(subjectEntity);
     }
 
+    @Test
+    void partialUpdateMethodReturnsTheUpdatedSubject() {
+        // Arrange
+        // ---dummy
+        var subjectDtoWithId = TestDataUtil.createTestSubjectDtoWithId();
+        var subjectEntityWithId = TestDataUtil.createTestSubjectEntityWithId();
+
+        // ---Stub
+        when(subjectMapperMock.mapFrom(subjectDtoWithId)).thenReturn(subjectEntityWithId);
+        when(subjectRepositoryMock.findById(1L)).thenReturn(Optional.of(subjectEntityWithId));
+        when(subjectRepositoryMock.save(subjectEntityWithId)).thenReturn(subjectEntityWithId);
+        when(subjectMapperMock.mapTo(subjectEntityWithId)).thenReturn(subjectDtoWithId);
+
+        // Act
+        var result = underTest.partialUpdate(1L, subjectDtoWithId);
+
+        // Assert
+        assertThat(result).isEqualTo(subjectDtoWithId);
+
+        // ---verify
+        verify(subjectMapperMock).mapFrom(subjectDtoWithId);
+        verify(subjectRepositoryMock).findById(1L);
+        verify(subjectRepositoryMock).save(subjectEntityWithId);
+        verify(subjectMapperMock).mapTo(subjectEntityWithId);
+    }
 
 
 }

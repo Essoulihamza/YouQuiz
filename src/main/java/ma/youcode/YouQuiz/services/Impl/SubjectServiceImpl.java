@@ -1,6 +1,7 @@
 package ma.youcode.YouQuiz.services.Impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -63,6 +64,18 @@ public class SubjectServiceImpl implements SubjectService  {
     @Override
     public void deleteAll() {
         subjectRepository.deleteAll();
+    }
+
+    @Override
+    public SubjectDto partialUpdate(Long id, SubjectDto subjectDto) {
+        subjectDto.setId(id);
+        var subjectEntity = subjectMapper.mapFrom(subjectDto);
+        return subjectRepository.findById(id).map(foundedSubject -> {
+            Optional.ofNullable(subjectEntity.getTitle()).ifPresent(foundedSubject::setTitle);
+            Optional.ofNullable(subjectEntity.getParentSubject()).ifPresent(foundedSubject::setParentSubject);
+            Optional.ofNullable(subjectEntity.getChildrenSubjects()).ifPresent(foundedSubject::setChildrenSubjects);
+            return subjectMapper.mapTo(subjectRepository.save(foundedSubject));
+        }).orElseThrow(() -> new RuntimeException("subject is not found"));
     }
 
 }

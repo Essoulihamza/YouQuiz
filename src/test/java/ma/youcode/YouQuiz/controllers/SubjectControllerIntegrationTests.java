@@ -189,4 +189,31 @@ public class SubjectControllerIntegrationTests {
         ).andExpect(MockMvcResultMatchers.jsonPath("$.id").value(savedSubject.getId()))
         .andExpect(MockMvcResultMatchers.jsonPath("$.title").value(savedSubject.getTitle()));
     }
+
+    @Test
+    void partialUpdateMethodReturns404NotFoundWhenTheSubjectIsNotExist() throws Exception {
+
+        var subject = TestDataUtil.createTestSubjectDto();
+        var subjectJson = objectMapper.writeValueAsString(subject);
+        mockMvc.perform(
+            MockMvcRequestBuilders.patch("/subjects/99")
+                                  .contentType(MediaType.APPLICATION_JSON)
+                                  .content(subjectJson)
+        ).andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    void partialUpdateMethodReturns200OkWithTheUpdatedSubjectWhenTheSubjectIsExist() throws Exception {
+
+        var subjectDto = TestDataUtil.createTestSubjectDto();
+        var savedSubject = subjectService.save(subjectDto);
+        var subjectJson = objectMapper.writeValueAsString(savedSubject);
+        mockMvc.perform(
+            MockMvcRequestBuilders.patch("/subjects/" + savedSubject.getId())
+                                  .contentType(MediaType.APPLICATION_JSON)
+                                  .content(subjectJson)
+        ).andExpect(MockMvcResultMatchers.status().isOk())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(savedSubject.getId()))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.title").value(savedSubject.getTitle()));
+    }
 }
