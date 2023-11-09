@@ -16,14 +16,16 @@ import ma.youcode.YouQuiz.services.LevelService;
 @Service
 public class LevelServiceImpl implements LevelService {
     
-    private final LevelRepository levelRepository;
-    private final Mapper<LevelEntity, LevelDto> levelMapper;
+    private final LevelRepository repository;
+    private final Mapper<LevelEntity, LevelDto> mapper;
 
     @Override
     public LevelDto save(LevelDto levelDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        var newLevelEntity = mapper.mapFrom(levelDto);
+        var createdLeveltDto = mapper.mapTo(repository.save(newLevelEntity));
+        return createdLeveltDto;
     }
+    
     @Override
     public List<LevelDto> getAll() {
         // TODO Auto-generated method stub
