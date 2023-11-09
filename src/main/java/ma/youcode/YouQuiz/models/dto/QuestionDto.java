@@ -18,6 +18,7 @@ public class QuestionDto {
     private String content;
     private QuestionType questionType;
     private LevelDto level;
+    private SubjectDto subject;
     private Set<QuestionAnswerDto> questionAnswers; 
     private Set<MediaDto> media;
     

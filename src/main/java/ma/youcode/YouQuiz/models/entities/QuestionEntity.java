@@ -47,10 +47,10 @@ public class QuestionEntity {
     @JoinColumn(name = "subject_id")
     private SubjectEntity subject;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private Set<QuestionAnswerEntity> questionAnswers; 
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private Set<MediaEntity> media;
 
 }

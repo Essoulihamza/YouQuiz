@@ -45,7 +45,7 @@ public class QuestionControllerIntegrationTests {
     }
 
     @Test
-    void createMethodSuccessfullyReturnsTheCreatedLevel() throws Exception {
+    void createMethodSuccessfullyReturnsTheCreatedQuestoni() throws Exception {
         var questionDto = TestDataUtil.getTestQuestionDto();
         var questionDtoJson = objectMapper.writeValueAsString(questionDto);
 
@@ -67,4 +67,43 @@ public class QuestionControllerIntegrationTests {
                                   .andExpect(MockMvcResultMatchers.status().isOk());
     }
 
+
+    @Test
+    void updateMethodReturnsHttp404NotFoundWhenTheQuestoinIsNotExist() throws Exception {
+
+        var questionDto = TestDataUtil.getTestQuestionDto();
+        var questionDtoJson = objectMapper.writeValueAsString(questionDto);
+        mockMvc.perform(
+            MockMvcRequestBuilders.put(END_PONT + "/99")
+                                  .contentType(MediaType.APPLICATION_JSON)
+                                  .content(questionDtoJson)
+        ).andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    void updateMethodReturnsHttp200OKWhenTheQuestionIsExist() throws Exception {
+
+        var questionDto = TestDataUtil.getTestQuestionDto();
+        var questionJson = objectMapper.writeValueAsString(questionDto);
+        var savedQuestion = questionService.save(questionDto);
+        mockMvc.perform(
+            MockMvcRequestBuilders.put(END_PONT + '/' + savedQuestion.getId())
+                                  .contentType(MediaType.APPLICATION_JSON)
+                                  .content(questionJson)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void updateMethodReturnsTheUpdatedQuestion() throws Exception {
+
+        var questionDto = TestDataUtil.getTestQuestionDto();
+        var levelJson = objectMapper.writeValueAsString(questionDto);
+        var savedQuestion = questionService.save(questionDto);
+        mockMvc.perform(
+            MockMvcRequestBuilders.put(END_PONT + '/' + savedQuestion.getId())
+                                  .contentType(MediaType.APPLICATION_JSON)
+                                  .content(levelJson))
+                                  .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(questionDto.getContent()))
+                                  .andExpect(MockMvcResultMatchers.jsonPath("$.questionType").value(questionDto.getQuestionType().name()));
+    }
 }

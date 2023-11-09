@@ -48,7 +48,7 @@ public class QuestionServiceImplTests {
     }
 
     @Test
-    void getAllMethodReturnsLevelsList() {
+    void getAllMethodReturnsQuestionsList() {
         
         var questionDto = TestDataUtil.getTestQuestionDto();
         var questionEntity = TestDataUtil.getTestQuestionEntity();
@@ -68,6 +68,11 @@ public class QuestionServiceImplTests {
 
         verify(repository).findAll();
         verify(mapper, times(questionEntityList.size())).mapTo(any(QuestionEntity.class));
+    }
+
+    @Test
+    void updateMethodReturnsTheUpdatedQuestion() {
+        this.saveMethodReturnsTheSavedEntity();;
     }
 
 }

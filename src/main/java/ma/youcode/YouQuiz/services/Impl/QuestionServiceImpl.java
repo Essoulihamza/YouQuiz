@@ -34,12 +34,13 @@ public class QuestionServiceImpl implements QuestionService {
                          .map(mapper::mapTo)
                          .collect(Collectors.toList());
     }
-    
+
     @Override
     public QuestionDto update(Long id, QuestionDto questionDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        questionDto.setId(id);
+        return save(questionDto);
     }
+
     @Override
     public void delete(Long identifier) {
         // TODO Auto-generated method stub
@@ -52,8 +53,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
     @Override
     public boolean isExist(Long identifier) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isExist'");
+        return repository.existsById(identifier);
     }
     @Override
     public void deleteAll() {
