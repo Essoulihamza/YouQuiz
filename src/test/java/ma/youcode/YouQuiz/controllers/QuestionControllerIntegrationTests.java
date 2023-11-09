@@ -106,4 +106,45 @@ public class QuestionControllerIntegrationTests {
                                   .andExpect(MockMvcResultMatchers.jsonPath("$.content").value(questionDto.getContent()))
                                   .andExpect(MockMvcResultMatchers.jsonPath("$.questionType").value(questionDto.getQuestionType().name()));
     }
+
+    @Test
+    void deleteMethodReturnsHttp204WhenQuestionIsNotExist() throws Exception {
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.delete(END_PONT + "/99")
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
+    @Test
+    void deleteMethodReturnsHttp204WhenQuestionIsExist() throws Exception {
+        var questionDto = TestDataUtil.getTestQuestionDto();
+        var savedQuestion = questionService.save(questionDto);
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.delete(END_PONT + '/' + savedQuestion.getId())
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
+    @Test
+    void deleteAllMethodReturnsHttp204WhenNoQuestionIsExist() throws Exception {
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.delete(END_PONT)
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
+    @Test
+    void deleteAllMethodReturnsHttp204WhenLevelsIsExist() throws Exception {
+        var questionDto = TestDataUtil.getTestQuestionDto();
+        questionService.save(questionDto);
+        
+        mockMvc.perform(
+            MockMvcRequestBuilders.delete(END_PONT)
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+    
 }

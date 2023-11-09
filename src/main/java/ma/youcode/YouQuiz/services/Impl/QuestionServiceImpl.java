@@ -43,8 +43,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void delete(Long identifier) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repository.deleteById(identifier);
     }
     @Override
     public QuestionDto find(Long identifier) {
@@ -57,8 +56,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
     @Override
     public void deleteAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
+        repository.deleteAll();
     }
     @Override
     public QuestionDto partialUpdate(Long identifier, QuestionDto dto) {
