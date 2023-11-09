@@ -158,4 +158,35 @@ public class SubjectControllerIntegrationTests {
         ).andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
+
+    @Test
+    void findMethodReturnsHttp400NotFoundWhenTheSubjectIsNotExist() throws Exception {
+        
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/subjects/99")
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isNotFound());
+    }
+
+    @Test
+    void findMethodReturnsHttp200OkWhenTheSubjectIsExist() throws Exception {
+        var subjectDto = TestDataUtil.createTestSubjectDto();
+        var savedSubject = subjectService.save(subjectDto);
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/subjects/"+ savedSubject.getId())
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void findMethodReturnsTheFoundedSubject() throws Exception {
+        var subjectDto = TestDataUtil.createTestSubjectDto();
+        var savedSubject = subjectService.save(subjectDto);
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/subjects/"+ savedSubject.getId())
+                                  .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(MockMvcResultMatchers.jsonPath("$.id").value(savedSubject.getId()))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.title").value(savedSubject.getTitle()));
+    }
 }

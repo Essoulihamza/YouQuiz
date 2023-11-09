@@ -47,8 +47,11 @@ public class SubjectServiceImpl implements SubjectService  {
 
     @Override
     public SubjectDto find(Long subjectId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'find'");
+        var optionalSubject = subjectRepository.findById(subjectId);
+        return optionalSubject.isPresent() ?
+            subjectMapper.mapTo(optionalSubject.get())
+        :
+            null;
     }
 
     @Override

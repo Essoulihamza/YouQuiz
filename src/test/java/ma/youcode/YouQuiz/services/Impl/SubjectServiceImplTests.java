@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -113,6 +114,44 @@ public class SubjectServiceImplTests {
         verify(subjectRepositoryMock).save(subjectEntityWithId);
         verify(subjectMapperMock).mapTo(subjectEntityWithId);
 
+    }
+
+
+    @Test
+    void findMethodReturnsNullWhenTheSubjectIsNotExist() {
+
+        // Arrange
+        // ---stub
+        when(subjectRepositoryMock.findById(99L)).thenReturn(Optional.empty());
+
+        // Act
+        var result = underTest.find(99L);
+        // Assert
+        assertThat(result).isNull();
+
+        // ---verify
+        verify(subjectRepositoryMock).findById(99L);
+    }
+
+    @Test
+    void findMethodReturnsTheFoundedSubjectDto() {
+
+        // Arrange
+        // ---dummy
+        var subjectEntity = TestDataUtil.createTestSubjectEntityWithId();
+        var subjectDto = TestDataUtil.createTestSubjectDtoWithId();
+        // ---stub
+        when(subjectRepositoryMock.findById(1L)).thenReturn(Optional.of(subjectEntity));
+        when(subjectMapperMock.mapTo(subjectEntity)).thenReturn(subjectDto);
+
+        // Act
+        var result = underTest.find(1L);
+
+        // Assert
+        assertThat(result).isEqualTo(subjectDto);
+
+        // ---verify
+        verify(subjectMapperMock).mapTo(subjectEntity);
     }
 
 

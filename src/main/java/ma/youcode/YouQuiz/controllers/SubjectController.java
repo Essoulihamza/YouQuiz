@@ -36,6 +36,14 @@ public class SubjectController {
         return subjectService.getAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<SubjectDto> findSubject(@PathVariable("id") Long id){
+        var foundedSubject = subjectService.find(id);
+        if(foundedSubject == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(foundedSubject, HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<SubjectDto> updateSubject(
             @PathVariable("id") Long id,
