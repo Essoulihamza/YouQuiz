@@ -104,7 +104,7 @@ public class SubjectServiceImplTests {
         when(subjectMapperMock.mapTo(subjectEntityWithId)).thenReturn(subjectDtoWithId);
         
         // Act
-        var result = underTest.update(subjectDtoWithId);
+        var result = underTest.update(subjectDtoWithId.getId() ,subjectDtoWithId);
 
         // Assert
         assertThat(result).isEqualTo(subjectDtoWithId);

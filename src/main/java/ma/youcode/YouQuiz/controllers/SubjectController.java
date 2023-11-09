@@ -51,7 +51,7 @@ public class SubjectController {
 
         if(!subjectService.isExist(id))
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        var updatedSubject = subjectService.update(subjectDtoToUpdate);
+        var updatedSubject = subjectService.update(id, subjectDtoToUpdate);
          return new ResponseEntity<>(updatedSubject ,HttpStatus.OK);
     }
 

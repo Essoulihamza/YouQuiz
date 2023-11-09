@@ -36,7 +36,8 @@ public class SubjectServiceImpl implements SubjectService  {
     }
 
     @Override
-    public SubjectDto update(SubjectDto subjectDtoToUpdate) {
+    public SubjectDto update(Long id, SubjectDto subjectDtoToUpdate) {
+        subjectDtoToUpdate.setId(id);
         return save(subjectDtoToUpdate);
     }
 
