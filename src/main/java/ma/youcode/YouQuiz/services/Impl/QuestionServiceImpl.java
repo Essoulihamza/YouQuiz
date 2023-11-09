@@ -1,6 +1,7 @@
 package ma.youcode.YouQuiz.services.Impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class QuestionServiceImpl implements QuestionService {
     public void delete(Long identifier) {
         repository.deleteById(identifier);
     }
-    
+
     @Override
     public QuestionDto find(Long identifier) {
         var optionalQuestion = repository.findById(identifier);
@@ -64,9 +65,17 @@ public class QuestionServiceImpl implements QuestionService {
         repository.deleteAll();
     }
     @Override
-    public QuestionDto partialUpdate(Long identifier, QuestionDto dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'partialUpdate'");
+    public QuestionDto partialUpdate(Long identifier, QuestionDto questionDto) {
+        questionDto.setId(identifier);
+        var questionEntity = mapper.mapFrom(questionDto);
+        return repository.findById(identifier).map(founded -> {
+            Optional.ofNullable(questionEntity.getContent()).ifPresent(founded::setContent);
+            Optional.ofNullable(questionEntity.getLevel()).ifPresent(founded::setLevel);
+            Optional.ofNullable(questionEntity.getMedia()).ifPresent(founded::setMedia);
+            Optional.ofNullable(questionEntity.getQuestionType()).ifPresent(founded::setQuestionType);
+            Optional.ofNullable(questionEntity.getQuestionAnswers()).ifPresent(founded::setQuestionAnswers);
+            return mapper.mapTo(repository.save(founded));
+        }).orElseThrow(() -> new RuntimeException("question not found"));
     }
     
 

@@ -107,4 +107,27 @@ public class QuestionServiceImplTests {
         verify(mapper).mapTo(questionEntity);
     }
 
+
+    @Test
+    void partialUpdateMethodReturnsTheUpdatedQuestion() {
+        var questionDto = TestDataUtil.getTestQuestionDto();
+        var questionEntity = TestDataUtil.getTestQuestionEntity();
+        questionDto.setId(1L);
+        questionEntity.setId(1L);
+
+        when(mapper.mapFrom(questionDto)).thenReturn(questionEntity);
+        when(repository.findById(1L)).thenReturn(Optional.of(questionEntity));
+        when(repository.save(questionEntity)).thenReturn(questionEntity);
+        when(mapper.mapTo(questionEntity)).thenReturn(questionDto);
+
+        var result = underTest.partialUpdate(1L, questionDto);
+
+        assertThat(result).isEqualTo(questionDto);
+
+        verify(mapper).mapFrom(questionDto);
+        verify(repository).findById(1L);
+        verify(repository).save(questionEntity);
+        verify(mapper).mapTo(questionEntity);
+    }
+
 }
