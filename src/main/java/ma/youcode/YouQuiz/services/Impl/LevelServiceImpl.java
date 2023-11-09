@@ -1,6 +1,7 @@
 package ma.youcode.YouQuiz.services.Impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -66,9 +67,15 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
-    public LevelDto partialUpdate(Integer identifier, LevelDto dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'partialUpdate'");
+    public LevelDto partialUpdate(Integer identifier, LevelDto levelDto) {
+        levelDto.setId(identifier);
+        return repository.findById(identifier).map(foundedLevel -> {
+            Optional.ofNullable(levelDto.getName()).ifPresent(foundedLevel::setName);
+            Optional.ofNullable(levelDto.getDescription()).ifPresent(foundedLevel::setDescription);
+            Optional.ofNullable(levelDto.getMaxPoint()).ifPresent(foundedLevel::setMaxPoint);
+            Optional.ofNullable(levelDto.getMinPoint()).ifPresent(foundedLevel::setMinPoint);
+            return mapper.mapTo(repository.save(foundedLevel));
+        }).orElseThrow(() -> new RuntimeException("level not found"));
     }
 
 }
