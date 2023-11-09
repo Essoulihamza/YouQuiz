@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class LevelDto {
     
     private Integer id;
+    private String name;
     private String description;
     private Double maxPoint;
     private Double minPoint; 

@@ -1,4 +1,4 @@
-package ma.youcode.YouQuiz.config;
+package ma.youcode.YouQuiz.configs;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

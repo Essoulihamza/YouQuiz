@@ -4,6 +4,7 @@ import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,12 +30,16 @@ public class QuestionEntity {
 
     private String content;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private QuestionType questionType;
 
     @ManyToOne
     @JoinColumn(name = "level_id")
     private LevelEntity level;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private SubjectEntity subject;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<QuestionAnswerEntity> questionAnswers; 

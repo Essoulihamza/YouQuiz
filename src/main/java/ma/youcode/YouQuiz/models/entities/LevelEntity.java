@@ -22,7 +22,6 @@ public class LevelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String description;
     private Double maxPoint;
     private Double minPoint; 

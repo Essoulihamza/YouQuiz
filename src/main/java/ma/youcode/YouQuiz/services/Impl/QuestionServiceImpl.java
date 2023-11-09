@@ -20,22 +20,22 @@ public class QuestionServiceImpl implements QuestionService {
     private final Mapper<QuestionEntity, QuestionDto> questionMapper;
 
     @Override
-    public QuestionDto create(QuestionDto questionDto) {
+    public QuestionDto save(QuestionDto questionDto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'create'");
     }
     @Override
-    public List<QuestionDto> read() {
+    public List<QuestionDto> getAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'read'");
     }
     @Override
-    public QuestionDto update(QuestionDto questionDto) {
+    public QuestionDto update(Long id, QuestionDto questionDto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
     @Override
-    public Boolean delete(Long identifier) {
+    public void delete(Long identifier) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
@@ -43,6 +43,21 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionDto find(Long identifier) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'find'");
+    }
+    @Override
+    public boolean isExist(Long identifier) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isExist'");
+    }
+    @Override
+    public void deleteAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
+    }
+    @Override
+    public QuestionDto partialUpdate(Long identifier, QuestionDto dto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'partialUpdate'");
     }
     
 

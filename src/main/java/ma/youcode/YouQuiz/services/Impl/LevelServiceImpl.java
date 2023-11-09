@@ -20,22 +20,22 @@ public class LevelServiceImpl implements LevelService {
     private final Mapper<LevelEntity, LevelDto> levelMapper;
 
     @Override
-    public LevelDto create(LevelDto levelDto) {
+    public LevelDto save(LevelDto levelDto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'create'");
     }
     @Override
-    public List<LevelDto> read() {
+    public List<LevelDto> getAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'read'");
     }
     @Override
-    public LevelDto update(LevelDto levelDto) {
+    public LevelDto update(Integer id, LevelDto levelDto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
     @Override
-    public Boolean delete(Integer identifier) {
+    public void delete(Integer identifier) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
@@ -43,6 +43,21 @@ public class LevelServiceImpl implements LevelService {
     public LevelDto find(Integer identifier) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'find'");
+    }
+    @Override
+    public boolean isExist(Integer identifier) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'isExist'");
+    }
+    @Override
+    public void deleteAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
+    }
+    @Override
+    public LevelDto partialUpdate(Integer identifier, LevelDto dto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'partialUpdate'");
     }
 
 }
