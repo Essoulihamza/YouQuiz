@@ -43,9 +43,9 @@ public class LevelServiceImpl implements LevelService {
 
     @Override
     public void delete(Integer identifier) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        repository.deleteById(identifier);
     }
+
     @Override
     public LevelDto find(Integer identifier) {
         // TODO Auto-generated method stub
@@ -59,9 +59,9 @@ public class LevelServiceImpl implements LevelService {
 
     @Override
     public void deleteAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
+        repository.deleteAll();
     }
+    
     @Override
     public LevelDto partialUpdate(Integer identifier, LevelDto dto) {
         // TODO Auto-generated method stub
