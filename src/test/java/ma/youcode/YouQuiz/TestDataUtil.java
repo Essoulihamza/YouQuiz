@@ -1,7 +1,12 @@
 package ma.youcode.YouQuiz;
 
+import ma.youcode.YouQuiz.models.dto.LevelDto;
+import ma.youcode.YouQuiz.models.dto.QuestionDto;
 import ma.youcode.YouQuiz.models.dto.SubjectDto;
+import ma.youcode.YouQuiz.models.entities.LevelEntity;
+import ma.youcode.YouQuiz.models.entities.QuestionEntity;
 import ma.youcode.YouQuiz.models.entities.SubjectEntity;
+import ma.youcode.YouQuiz.models.enums.QuestionType;
 
 public final class TestDataUtil {
     
@@ -41,5 +46,38 @@ public final class TestDataUtil {
                             .build();
     }
 
+    public static LevelEntity getTestLevelEntity() {
+        return LevelEntity.builder()
+                          .id(1)
+                          .name("level")
+                          .description("description")
+                          .maxPoint(10D)
+                          .minPoint(2D)
+                          .build();
+    }
+
+    public static LevelDto getTestLevelDto() {
+        return LevelDto.builder()
+                          .id(1)
+                          .name("level")
+                          .description("description")
+                          .maxPoint(10D)
+                          .minPoint(2D)
+                          .build();
+    }
+
+    public static QuestionDto getTestQuestionDto() {
+        return QuestionDto.builder()
+                          .content("question ?")
+                          .questionType(QuestionType.MULTIPLE_ANSWER)
+                          .build();
+    }
+
+    public static QuestionEntity getTestQuestionEntity() {
+        return QuestionEntity.builder()
+                             .content("question ?")
+                             .questionType(QuestionType.MULTIPLE_ANSWER)
+                             .build();
+    }
 
 }

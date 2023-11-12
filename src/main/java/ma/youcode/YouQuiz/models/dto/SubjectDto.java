@@ -17,5 +17,5 @@ public class SubjectDto {
     private String title;
     private SubjectDto parentSubject;
     private Set<SubjectDto> childrenSubjects;
-    
+    private Set<QuestionDto> questions;
 }
