@@ -12,17 +12,17 @@ public class LevelMapper implements Mapper<LevelEntity, LevelDto> {
 
     private final ModelMapper modelMapper;
 
-    public LevelMapper(ModelMapper modelMapper) {
+    public LevelMapper(final ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public LevelDto mapTo(LevelEntity LevelEntity) {
+    public LevelDto mapTo(final LevelEntity LevelEntity) {
         return modelMapper.map(LevelEntity, LevelDto.class);
     }
 
     @Override
-    public LevelEntity mapFrom(LevelDto LevelDto) {
+    public LevelEntity mapFrom(final LevelDto LevelDto) {
         return modelMapper.map(LevelDto, LevelEntity.class);
     }
     

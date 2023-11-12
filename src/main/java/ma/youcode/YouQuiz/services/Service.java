@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface Service<Dto, Identifier> {
     
-    Dto save(Dto dto);
+    Dto save(final Dto dto);
     List<Dto> getAll();
-    Dto update(Identifier identifier, Dto dto);
-    void delete(Identifier identifier);
-    Dto find(Identifier identifier);
-    Dto partialUpdate(Identifier identifier, Dto dto);
-    boolean isExist(Identifier identifier);
+    Dto update(final Identifier identifier, final Dto dto);
+    void delete(final Identifier identifier);
+    Dto find(final Identifier identifier);
+    Dto partialUpdate(final Identifier identifier, final Dto dto);
+    boolean isExist(final Identifier identifier);
     void deleteAll();
 
 }

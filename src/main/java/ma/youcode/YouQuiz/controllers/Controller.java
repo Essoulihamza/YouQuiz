@@ -23,12 +23,12 @@ public abstract class Controller<Dto, Identifier> {
     private Service<Dto, Identifier> service;
 
     @Autowired
-    public void setService(Service<Dto, Identifier> service) {
+    public void setService(final Service<Dto, Identifier> service) {
         this.service = service;
     }
 
     @PostMapping
-    public ResponseEntity<Dto> save(@Valid @RequestBody Dto dto) {
+    public ResponseEntity<Dto> save(@Valid @RequestBody final Dto dto) {
         var savedDto = service.save(dto);
         return new ResponseEntity<>(savedDto, HttpStatus.CREATED);
     } 
@@ -39,7 +39,7 @@ public abstract class Controller<Dto, Identifier> {
     } 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Dto> find(@PathVariable("id") Identifier id) {
+    public ResponseEntity<Dto> find(@PathVariable("id") final Identifier id) {
         var foundedDto = service.find(id);
         if (foundedDto == null) 
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -47,7 +47,7 @@ public abstract class Controller<Dto, Identifier> {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Dto> update(@PathVariable("id") Identifier id, @Valid @RequestBody Dto dto) {
+    public ResponseEntity<Dto> update(@PathVariable("id") final Identifier id, @Valid @RequestBody final Dto dto) {
         if(!service.isExist(id))
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         var updatedDto = service.update(id, dto);
@@ -55,7 +55,7 @@ public abstract class Controller<Dto, Identifier> {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") Identifier id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") final Identifier id) {
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     } 
@@ -67,7 +67,7 @@ public abstract class Controller<Dto, Identifier> {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Dto> partialUpdate(@PathVariable("id") Identifier id, @Valid @RequestBody Dto dto) {
+    public ResponseEntity<Dto> partialUpdate(@PathVariable("id") final Identifier id, @Valid @RequestBody final Dto dto) {
         if(!service.isExist(id))
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         var updatedDto = service.partialUpdate(id, dto);

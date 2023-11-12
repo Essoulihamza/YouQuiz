@@ -22,7 +22,7 @@ public class LevelServiceImpl implements LevelService {
     private final Mapper<LevelEntity, LevelDto> mapper;
 
     @Override
-    public LevelDto save(LevelDto levelDto) {
+    public LevelDto save(final LevelDto levelDto) {
         var newLevelEntity = mapper.mapFrom(levelDto);
         var createdLeveltDto = mapper.mapTo(repository.save(newLevelEntity));
         return createdLeveltDto;
@@ -37,18 +37,18 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
-    public LevelDto update(Integer id, LevelDto levelDto) {
+    public LevelDto update(final Integer id, final LevelDto levelDto) {
         levelDto.setId(id);
         return save(levelDto);
     }
 
     @Override
-    public void delete(Integer identifier) {
+    public void delete(final Integer identifier) {
         repository.deleteById(identifier);
     }
 
     @Override
-    public LevelDto find(Integer identifier) {
+    public LevelDto find(final Integer identifier) {
         var optionalEntity = repository.findById(identifier);
         return optionalEntity.isPresent() ?
             mapper.mapTo(optionalEntity.get())
@@ -57,7 +57,7 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
-    public boolean isExist(Integer identifier) {
+    public boolean isExist(final Integer identifier) {
         return repository.existsById(identifier);
     }
 
@@ -67,7 +67,7 @@ public class LevelServiceImpl implements LevelService {
     }
 
     @Override
-    public LevelDto partialUpdate(Integer identifier, LevelDto levelDto) {
+    public LevelDto partialUpdate(final Integer identifier, final LevelDto levelDto) {
         levelDto.setId(identifier);
         return repository.findById(identifier).map(foundedLevel -> {
             Optional.ofNullable(levelDto.getName()).ifPresent(foundedLevel::setName);

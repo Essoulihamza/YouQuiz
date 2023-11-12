@@ -1,8 +1,8 @@
 package ma.youcode.YouQuiz.models.mappers;
 
-public interface Mapper<A, B> {
+public interface Mapper<Entity, Dto> {
     
-    B mapTo(A a);
-    A mapFrom(B b);
+    Dto mapTo(final Entity a);
+    Entity mapFrom(final Dto b);
 
 }

@@ -12,17 +12,17 @@ public class SubjectMapper implements Mapper<SubjectEntity, SubjectDto> {
     
     private final ModelMapper modelMapper;
 
-    public SubjectMapper(ModelMapper modelMapper) {
+    public SubjectMapper(final ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public SubjectDto mapTo(SubjectEntity SubjectEntity) {
+    public SubjectDto mapTo(final SubjectEntity SubjectEntity) {
         return modelMapper.map(SubjectEntity, SubjectDto.class);
     }
 
     @Override
-    public SubjectEntity mapFrom(SubjectDto SubjectDto) {
+    public SubjectEntity mapFrom(final SubjectDto SubjectDto) {
         return modelMapper.map(SubjectDto, SubjectEntity.class);
     }
 }

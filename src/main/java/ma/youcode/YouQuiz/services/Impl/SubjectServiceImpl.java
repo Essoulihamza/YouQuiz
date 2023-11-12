@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import ma.youcode.YouQuiz.models.dto.SubjectDto;
 import ma.youcode.YouQuiz.models.entities.SubjectEntity;
 import ma.youcode.YouQuiz.models.mappers.Mapper;
@@ -15,7 +14,6 @@ import ma.youcode.YouQuiz.repositories.SubjectRepository;
 import ma.youcode.YouQuiz.services.SubjectService;
 
 @AllArgsConstructor
-@Slf4j
 @Service
 public class SubjectServiceImpl implements SubjectService  {
 
@@ -25,10 +23,8 @@ public class SubjectServiceImpl implements SubjectService  {
     
 
     @Override
-    public SubjectDto save(SubjectDto subjectDto) {
+    public SubjectDto save(final SubjectDto subjectDto) {
         var newSubjectEntity = subjectMapper.mapFrom(subjectDto);
-        log.info(subjectDto.toString());
-        log.info(newSubjectEntity.toString());
         var createdSubjectDto = subjectMapper.mapTo(subjectRepository.save(newSubjectEntity));
         return createdSubjectDto;
     }
@@ -40,18 +36,18 @@ public class SubjectServiceImpl implements SubjectService  {
     }
 
     @Override
-    public SubjectDto update(Long id, SubjectDto subjectDtoToUpdate) {
+    public SubjectDto update(final Long id, final SubjectDto subjectDtoToUpdate) {
         subjectDtoToUpdate.setId(id);
         return save(subjectDtoToUpdate);
     }
 
     @Override
-    public void delete(Long subjectId) {
+    public void delete(final Long subjectId) {
         subjectRepository.deleteById(subjectId);
     }
 
     @Override
-    public SubjectDto find(Long subjectId) {
+    public SubjectDto find(final Long subjectId) {
         var optionalSubject = subjectRepository.findById(subjectId);
         return optionalSubject.isPresent() ?
             subjectMapper.mapTo(optionalSubject.get())
@@ -60,7 +56,7 @@ public class SubjectServiceImpl implements SubjectService  {
     }
 
     @Override
-    public boolean isExist(Long subjectId) {
+    public boolean isExist(final Long subjectId) {
         return subjectRepository.existsById(subjectId);        
     }
 
@@ -70,7 +66,7 @@ public class SubjectServiceImpl implements SubjectService  {
     }
 
     @Override
-    public SubjectDto partialUpdate(Long id, SubjectDto subjectDto) {
+    public SubjectDto partialUpdate(final Long id, final SubjectDto subjectDto) {
         subjectDto.setId(id);
         var subjectEntity = subjectMapper.mapFrom(subjectDto);
         return subjectRepository.findById(id).map(foundedSubject -> {

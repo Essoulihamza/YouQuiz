@@ -12,17 +12,17 @@ public class QuestionMapper implements Mapper<QuestionEntity, QuestionDto> {
 
     private final ModelMapper modelMapper;
 
-    public QuestionMapper(ModelMapper modelMapper) {
+    public QuestionMapper(final ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public QuestionDto mapTo(QuestionEntity QuestionEntity) {
+    public QuestionDto mapTo(final QuestionEntity QuestionEntity) {
         return modelMapper.map(QuestionEntity, QuestionDto.class);
     }
 
     @Override
-    public QuestionEntity mapFrom(QuestionDto QuestionDto) {
+    public QuestionEntity mapFrom(final QuestionDto QuestionDto) {
         return modelMapper.map(QuestionDto, QuestionEntity.class);
     }
     

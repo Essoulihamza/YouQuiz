@@ -12,17 +12,17 @@ public class MediaMapper implements Mapper<MediaEntity, MediaDto> {
     
     private final ModelMapper modelMapper;
 
-    public MediaMapper(ModelMapper modelMapper) {
+    public MediaMapper(final ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public MediaDto mapTo(MediaEntity MediaEntity) {
+    public MediaDto mapTo(final MediaEntity MediaEntity) {
         return modelMapper.map(MediaEntity, MediaDto.class);
     }
 
     @Override
-    public MediaEntity mapFrom(MediaDto MediaDto) {
+    public MediaEntity mapFrom(final MediaDto MediaDto) {
         return modelMapper.map(MediaDto, MediaEntity.class);
     }
 }

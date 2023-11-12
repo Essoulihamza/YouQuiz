@@ -12,17 +12,17 @@ public class AnswerMapper implements Mapper<AnswerEntity, AnswerDto> {
 
     private final ModelMapper modelMapper;
 
-    public AnswerMapper(ModelMapper modelMapper) {
+    public AnswerMapper(final ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public AnswerDto mapTo(AnswerEntity answerEntity) {
+    public AnswerDto mapTo(final AnswerEntity answerEntity) {
         return modelMapper.map(answerEntity, AnswerDto.class);
     }
 
     @Override
-    public AnswerEntity mapFrom(AnswerDto answerDto) {
+    public AnswerEntity mapFrom(final AnswerDto answerDto) {
         return modelMapper.map(answerDto, AnswerEntity.class);
     }
     
