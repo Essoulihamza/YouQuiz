@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import jakarta.validation.Valid;
 import ma.youcode.YouQuiz.services.Service;
 
 @Component
@@ -26,7 +28,7 @@ public abstract class Controller<Dto, Identifier> {
     }
 
     @PostMapping
-    public ResponseEntity<Dto> save(@RequestBody Dto dto) {
+    public ResponseEntity<Dto> save(@Valid @RequestBody Dto dto) {
         var savedDto = service.save(dto);
         return new ResponseEntity<>(savedDto, HttpStatus.CREATED);
     } 
@@ -45,7 +47,7 @@ public abstract class Controller<Dto, Identifier> {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Dto> update(@PathVariable("id") Identifier id, @RequestBody Dto dto) {
+    public ResponseEntity<Dto> update(@PathVariable("id") Identifier id, @Valid @RequestBody Dto dto) {
         if(!service.isExist(id))
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         var updatedDto = service.update(id, dto);
@@ -65,12 +67,11 @@ public abstract class Controller<Dto, Identifier> {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Dto> partialUpdate(@PathVariable("id") Identifier id, @RequestBody Dto dto) {
-
+    public ResponseEntity<Dto> partialUpdate(@PathVariable("id") Identifier id, @Valid @RequestBody Dto dto) {
         if(!service.isExist(id))
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         var updatedDto = service.partialUpdate(id, dto);
         return new ResponseEntity<>(updatedDto, HttpStatus.OK);
     }
-    
+
 }
