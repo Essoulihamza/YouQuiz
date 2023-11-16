@@ -8,12 +8,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ma.youcode.YouQuiz.models.enums.MediaType;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 public class MediaEntity {
@@ -25,7 +29,7 @@ public class MediaEntity {
     private String url;
 
     @Enumerated(EnumType.STRING)
-    private MediaType mediaType;
+    private MediaType type;
 
     @ManyToOne
     @JoinColumn(name = "question_id")

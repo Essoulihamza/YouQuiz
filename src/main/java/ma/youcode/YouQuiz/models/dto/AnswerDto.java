@@ -21,7 +21,6 @@ public class AnswerDto {
     @Size(max = 255, message = "Answer content must be less than 255 character.")
     private String content;
 
-    @NotEmpty(message = "Can't add an answer without assign it to a question.")
     private Set<QuestionAnswerDto> questionAnswers;
 
 }

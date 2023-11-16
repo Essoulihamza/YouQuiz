@@ -25,6 +25,6 @@ public class AnswerEntity {
 
     private String content;
 
-    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private Set<QuestionAnswerEntity> questionAnswers;
 }

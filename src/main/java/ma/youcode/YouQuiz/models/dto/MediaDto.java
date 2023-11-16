@@ -4,11 +4,13 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ma.youcode.YouQuiz.models.enums.MediaType;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,9 +22,8 @@ public class MediaDto {
     private String url;
 
     @NotNull(message = "Media type is required.")
-    private MediaType mediaType;
+    private MediaType type;
 
-    @NotNull(message = "Media question is requiered.")
     private QuestionDto question;
 
 }
