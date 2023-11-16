@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ma.youcode.YouQuiz.TestDataUtil;
-import ma.youcode.YouQuiz.services.LevelService;
+import ma.youcode.YouQuiz.services.interfaces.LevelService;
 
 
 @SpringBootTest

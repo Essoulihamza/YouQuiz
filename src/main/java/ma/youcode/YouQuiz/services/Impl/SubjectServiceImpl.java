@@ -11,7 +11,7 @@ import ma.youcode.YouQuiz.models.dto.SubjectDto;
 import ma.youcode.YouQuiz.models.entities.SubjectEntity;
 import ma.youcode.YouQuiz.models.mappers.Mapper;
 import ma.youcode.YouQuiz.repositories.SubjectRepository;
-import ma.youcode.YouQuiz.services.SubjectService;
+import ma.youcode.YouQuiz.services.interfaces.SubjectService;
 
 @AllArgsConstructor
 @Service

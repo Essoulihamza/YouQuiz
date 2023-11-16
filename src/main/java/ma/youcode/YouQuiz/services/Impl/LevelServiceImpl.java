@@ -11,7 +11,7 @@ import ma.youcode.YouQuiz.models.dto.LevelDto;
 import ma.youcode.YouQuiz.models.entities.LevelEntity;
 import ma.youcode.YouQuiz.models.mappers.Mapper;
 import ma.youcode.YouQuiz.repositories.LevelRepository;
-import ma.youcode.YouQuiz.services.LevelService;
+import ma.youcode.YouQuiz.services.interfaces.LevelService;
 
 @AllArgsConstructor
 

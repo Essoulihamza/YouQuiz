@@ -2,7 +2,7 @@ package ma.youcode.YouQuiz.services;
 
 import java.util.List;
 
-public interface Service<Dto, Identifier> {
+public interface ServiceInterface<Dto, Identifier> {
     
     Dto save(final Dto dto);
     List<Dto> getAll();

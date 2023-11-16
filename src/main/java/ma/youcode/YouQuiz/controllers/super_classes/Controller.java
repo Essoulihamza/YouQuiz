@@ -1,4 +1,4 @@
-package ma.youcode.YouQuiz.controllers;
+package ma.youcode.YouQuiz.controllers.super_classes;
 
 import java.util.List;
 
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import jakarta.validation.Valid;
-import ma.youcode.YouQuiz.services.Service;
+import ma.youcode.YouQuiz.services.ServiceInterface;
 
 @Component
 public abstract class Controller<Dto, Identifier> {
     
-    private Service<Dto, Identifier> service;
+    private ServiceInterface<Dto, Identifier> service;
 
     @Autowired
-    public void setService(final Service<Dto, Identifier> service) {
+    public void setService(final ServiceInterface<Dto, Identifier> service) {
         this.service = service;
     }
 

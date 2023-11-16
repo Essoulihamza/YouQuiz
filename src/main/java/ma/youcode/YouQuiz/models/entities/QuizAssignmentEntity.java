@@ -1,9 +1,11 @@
 package ma.youcode.YouQuiz.models.entities;
 
+import java.time.LocalTime;
+
+import org.hibernate.annotations.ColumnDefault;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,30 +17,42 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ma.youcode.YouQuiz.models.enums.MediaType;
+import ma.youcode.YouQuiz.models.enums.TestResult;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 
 @Entity
-@Table(name = "media")
-public class MediaEntity {
+@Table(name = "quiz_assignemnts")
+public class QuizAssignmentEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String url;
+    @ColumnDefault("CURRENT_TIME")
+    private LocalTime startDate;
 
-    @Enumerated(EnumType.STRING)
-    private MediaType mediaType;
+    private LocalTime endDate;
+
+    @Column(length = 255)
+    private String remark;
+
+    @Column(nullable = false)
+    private Integer chance;
+
+    private Double real;
+    private TestResult result;
 
     @ManyToOne
-    @JoinColumn(name = "question_id", nullable = false)
-    private QuestionEntity question;
-    
+    @JoinColumn(name = "quiz_id", nullable = false)
+    private QuizEntity quiz;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    private StudentEntity student;
+
 }

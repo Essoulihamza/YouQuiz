@@ -11,10 +11,9 @@ import ma.youcode.YouQuiz.models.dto.QuestionDto;
 import ma.youcode.YouQuiz.models.entities.QuestionEntity;
 import ma.youcode.YouQuiz.models.mappers.Mapper;
 import ma.youcode.YouQuiz.repositories.QuestionRepository;
-import ma.youcode.YouQuiz.services.QuestionService;
+import ma.youcode.YouQuiz.services.interfaces.QuestionService;
 
 @AllArgsConstructor
-
 @Service
 public class QuestionServiceImpl implements QuestionService {
     
@@ -73,7 +72,7 @@ public class QuestionServiceImpl implements QuestionService {
             Optional.ofNullable(questionEntity.getLevel()).ifPresent(founded::setLevel);
             Optional.ofNullable(questionEntity.getMedia()).ifPresent(founded::setMedia);
             Optional.ofNullable(questionEntity.getQuestionType()).ifPresent(founded::setQuestionType);
-            Optional.ofNullable(questionEntity.getQuestionAnswers()).ifPresent(founded::setQuestionAnswers);
+            Optional.ofNullable(questionEntity.getAnswers()).ifPresent(founded::setAnswers);
             return mapper.mapTo(repository.save(founded));
         }).orElseThrow(() -> new RuntimeException("question not found"));
     }

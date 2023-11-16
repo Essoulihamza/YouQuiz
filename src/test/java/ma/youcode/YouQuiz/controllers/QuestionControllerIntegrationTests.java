@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ma.youcode.YouQuiz.TestDataUtil;
-import ma.youcode.YouQuiz.services.QuestionService;
+import ma.youcode.YouQuiz.services.interfaces.QuestionService;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)

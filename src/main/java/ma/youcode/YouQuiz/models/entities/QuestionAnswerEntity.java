@@ -1,5 +1,6 @@
 package ma.youcode.YouQuiz.models.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,13 +22,14 @@ public class QuestionAnswerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Double correctnessRate;
 
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "question_id", nullable = false)
     private QuestionEntity question;
 
     @ManyToOne
-    @JoinColumn(name = "answer_id")
+    @JoinColumn(name = "answer_id", nullable = false)
     private AnswerEntity answer;
 }
