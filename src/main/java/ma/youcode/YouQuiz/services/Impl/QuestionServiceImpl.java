@@ -21,7 +21,7 @@ public class QuestionServiceImpl implements QuestionService {
     private final Mapper<QuestionEntity, QuestionDto> mapper;
 
     @Override
-    public QuestionDto save(final QuestionDto questionDto) {
+    public QuestionDto save(final QuestionDto questionDto) throws RuntimeException {
         var questionEntity = mapper.mapFrom(questionDto);
         var savedEntity = repository.save(questionEntity);
         return mapper.mapTo(savedEntity);
@@ -59,10 +59,12 @@ public class QuestionServiceImpl implements QuestionService {
     public boolean isExist(final Long identifier) {
         return repository.existsById(identifier);
     }
+
     @Override
     public void deleteAll() {
         repository.deleteAll();
     }
+
     @Override
     public QuestionDto partialUpdate(final Long identifier, final QuestionDto questionDto) {
         questionDto.setId(identifier);
@@ -76,8 +78,5 @@ public class QuestionServiceImpl implements QuestionService {
             return mapper.mapTo(repository.save(founded));
         }).orElseThrow(() -> new RuntimeException("question not found"));
     }
-    
-
-    
 
 }

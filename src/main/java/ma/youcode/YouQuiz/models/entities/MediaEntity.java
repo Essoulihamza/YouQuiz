@@ -35,7 +35,7 @@ public class MediaEntity {
     private String url;
 
     @Enumerated(EnumType.STRING)
-    private MediaType mediaType;
+    private MediaType type;
 
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
