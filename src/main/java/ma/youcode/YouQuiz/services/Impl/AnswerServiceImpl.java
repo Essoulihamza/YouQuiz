@@ -2,36 +2,38 @@ package ma.youcode.YouQuiz.services.Impl;
 
 import java.util.List;
 
-import ma.youcode.YouQuiz.models.dto.QuestionAnswerDto;
-import ma.youcode.YouQuiz.models.entities.QuestionAnswerEntity;
+import org.springframework.stereotype.Service;
+
+import lombok.AllArgsConstructor;
+import ma.youcode.YouQuiz.models.dto.AnswerDto;
+import ma.youcode.YouQuiz.models.entities.AnswerEntity;
 import ma.youcode.YouQuiz.models.mappers.Mapper;
-import ma.youcode.YouQuiz.repositories.QuestionAnswerRepository;
-import ma.youcode.YouQuiz.services.interfaces.QuestionAnswerService;
+import ma.youcode.YouQuiz.repositories.AnswerRepository;
+import ma.youcode.YouQuiz.services.interfaces.AnswerService;
 
-public class QuestionAnswerServiceImpl implements QuestionAnswerService {
+@AllArgsConstructor
 
-    private final QuestionAnswerRepository repository;
-    private final Mapper<QuestionAnswerEntity, QuestionAnswerDto> mapper;
+@Service
+public class AnswerServiceImpl implements AnswerService {
 
-    public QuestionAnswerServiceImpl(QuestionAnswerRepository repository, Mapper<QuestionAnswerEntity, QuestionAnswerDto> mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
+    private final AnswerRepository repository;
+    private final Mapper<AnswerEntity, AnswerDto> mapper;
+
 
     @Override
-    public QuestionAnswerDto save(QuestionAnswerDto dto) {
+    public AnswerDto save(AnswerDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
 
     @Override
-    public List<QuestionAnswerDto> getAll() {
+    public List<AnswerDto> getAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
     @Override
-    public QuestionAnswerDto update(Long identifier, QuestionAnswerDto dto) {
+    public AnswerDto update(Long identifier, AnswerDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
@@ -43,13 +45,13 @@ public class QuestionAnswerServiceImpl implements QuestionAnswerService {
     }
 
     @Override
-    public QuestionAnswerDto find(Long identifier) {
+    public AnswerDto find(Long identifier) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'find'");
     }
 
     @Override
-    public QuestionAnswerDto partialUpdate(Long identifier, QuestionAnswerDto dto) {
+    public AnswerDto partialUpdate(Long identifier, AnswerDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'partialUpdate'");
     }

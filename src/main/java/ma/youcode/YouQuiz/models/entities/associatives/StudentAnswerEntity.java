@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ma.youcode.YouQuiz.models.embeddables.StudentAnswerKey;
-import ma.youcode.YouQuiz.models.entities.QuestionAnswerEntity;
+import ma.youcode.YouQuiz.models.entities.ValidAnswerEntity;
 import ma.youcode.YouQuiz.models.entities.QuizAssignmentEntity;
 
 @Getter
@@ -33,7 +33,7 @@ public class StudentAnswerEntity {
 
     @ManyToOne
     @MapsId("question_answer_id")
-    private QuestionAnswerEntity questionAnswerEntity;
+    private ValidAnswerEntity questionAnswerEntity;
 
     @ManyToOne
     @MapsId("quiz_assignment_id")

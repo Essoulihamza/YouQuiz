@@ -51,7 +51,7 @@ public class QuestionEntity {
     private SubjectEntity subject;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private Set<QuestionAnswerEntity> answers; 
+    private Set<ValidAnswerEntity> answers; 
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private Set<MediaEntity> media;

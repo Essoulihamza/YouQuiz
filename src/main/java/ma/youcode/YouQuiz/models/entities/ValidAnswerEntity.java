@@ -15,8 +15,8 @@ import lombok.Setter;
 @Setter
 
 @Entity
-@Table(name = "questions_answers")
-public class QuestionAnswerEntity {
+@Table(name = "valid_answers")
+public class ValidAnswerEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

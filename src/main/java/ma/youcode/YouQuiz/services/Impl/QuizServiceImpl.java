@@ -4,22 +4,20 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
 import ma.youcode.YouQuiz.models.dto.QuizDto;
 import ma.youcode.YouQuiz.models.entities.QuizEntity;
 import ma.youcode.YouQuiz.models.mappers.Mapper;
 import ma.youcode.YouQuiz.repositories.QuizRepository;
 import ma.youcode.YouQuiz.services.interfaces.QuizService;
 
+@AllArgsConstructor
+
 @Service
 public class QuizServiceImpl implements QuizService  {
 
     private final QuizRepository repository;
     private final Mapper<QuizEntity, QuizDto> mapper;
-
-    public QuizServiceImpl(QuizRepository repository, Mapper<QuizEntity, QuizDto> mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
 
     @Override
     public QuizDto save(QuizDto dto) {

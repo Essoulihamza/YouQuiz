@@ -23,6 +23,6 @@ public class AnswerDto {
     private String content;
 
     @NotEmpty(message = "Can't add an answer without assign it to a question.")
-    private Set<QuestionAnswerDto> questionAnswers;
+    private Set<ValidAnswerDto> questionAnswers;
 
 }

@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 import ma.youcode.YouQuiz.models.entities.AnswerEntity;
 
 @Repository
-public interface AnswerRepositoty extends JpaRepository<AnswerEntity, Long> {
-    
-}
+public interface AnswerRepository extends JpaRepository<AnswerEntity, Long> {}

@@ -5,34 +5,34 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import ma.youcode.YouQuiz.models.dto.TrainerDto;
-import ma.youcode.YouQuiz.models.entities.TrainerEntity;
+import ma.youcode.YouQuiz.models.dto.ValidAnswerDto;
+import ma.youcode.YouQuiz.models.entities.ValidAnswerEntity;
 import ma.youcode.YouQuiz.models.mappers.Mapper;
-import ma.youcode.YouQuiz.repositories.TrainerRepositoty;
-import ma.youcode.YouQuiz.services.interfaces.TrainerService;
+import ma.youcode.YouQuiz.repositories.QuestionAnswerRepository;
+import ma.youcode.YouQuiz.services.interfaces.ValidAnswerService;
 
 @AllArgsConstructor
 
 @Service
-public class TrainerServiceImpl implements TrainerService {
-    
-    private final TrainerRepositoty repository;
-    private final Mapper<TrainerEntity, TrainerDto> mapper;
+public class ValidAnswerServiceImpl implements ValidAnswerService {
+
+    private final QuestionAnswerRepository repository;
+    private final Mapper<ValidAnswerEntity, ValidAnswerDto> mapper;
 
     @Override
-    public TrainerDto save(TrainerDto dto) {
+    public ValidAnswerDto save(ValidAnswerDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
 
     @Override
-    public List<TrainerDto> getAll() {
+    public List<ValidAnswerDto> getAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
     @Override
-    public TrainerDto update(Long identifier, TrainerDto dto) {
+    public ValidAnswerDto update(Long identifier, ValidAnswerDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
@@ -44,13 +44,13 @@ public class TrainerServiceImpl implements TrainerService {
     }
 
     @Override
-    public TrainerDto find(Long identifier) {
+    public ValidAnswerDto find(Long identifier) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'find'");
     }
 
     @Override
-    public TrainerDto partialUpdate(Long identifier, TrainerDto dto) {
+    public ValidAnswerDto partialUpdate(Long identifier, ValidAnswerDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'partialUpdate'");
     }
@@ -66,4 +66,5 @@ public class TrainerServiceImpl implements TrainerService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
     }
+    
 }

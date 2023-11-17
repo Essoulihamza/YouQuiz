@@ -32,7 +32,7 @@ public class QuestionDto {
     private SubjectDto subject;
 
     @NotEmpty(message = "Question answers is required.")
-    private Set<QuestionAnswerDto> answers;
+    private Set<ValidAnswerDto> answers;
     
     private Set<MediaDto> media;
     

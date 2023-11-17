@@ -28,5 +28,5 @@ public class AnswerEntity {
     private String content;
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<QuestionAnswerEntity> questionAnswers;
+    private Set<ValidAnswerEntity> questionAnswers;
 }

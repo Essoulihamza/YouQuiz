@@ -2,21 +2,22 @@ package ma.youcode.YouQuiz.services.Impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import lombok.AllArgsConstructor;
 import ma.youcode.YouQuiz.models.dto.QuizAssignmentDto;
 import ma.youcode.YouQuiz.models.entities.QuizAssignmentEntity;
 import ma.youcode.YouQuiz.models.mappers.Mapper;
 import ma.youcode.YouQuiz.repositories.QuizAssignmentRepository;
 import ma.youcode.YouQuiz.services.interfaces.QuizAssignmentService;
 
+@AllArgsConstructor
+
+@Service
 public class QuizAssignmentServiceImpl implements QuizAssignmentService {
 
     private final QuizAssignmentRepository repository;
     private final Mapper<QuizAssignmentEntity, QuizAssignmentDto> mapper;
-
-    public QuizAssignmentServiceImpl(QuizAssignmentRepository repository, Mapper<QuizAssignmentEntity, QuizAssignmentDto> mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
 
     @Override
     public QuizAssignmentDto save(QuizAssignmentDto dto) {

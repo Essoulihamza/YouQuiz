@@ -2,21 +2,22 @@ package ma.youcode.YouQuiz.services.Impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import lombok.AllArgsConstructor;
 import ma.youcode.YouQuiz.models.dto.StudentDto;
 import ma.youcode.YouQuiz.models.entities.StudentEntity;
 import ma.youcode.YouQuiz.models.mappers.Mapper;
 import ma.youcode.YouQuiz.repositories.StudentRepository;
 import ma.youcode.YouQuiz.services.interfaces.StudentService;
 
+@AllArgsConstructor
+
+@Service
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository repository;
     private final Mapper<StudentEntity, StudentDto> mapper;
-
-    public StudentServiceImpl(StudentRepository repository, Mapper<StudentEntity, StudentDto> mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
 
     @Override
     public StudentDto save(StudentDto dto) {

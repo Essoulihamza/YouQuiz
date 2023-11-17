@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ma.youcode.YouQuiz.models.entities.QuestionAnswerEntity;
+import ma.youcode.YouQuiz.models.entities.ValidAnswerEntity;
 import ma.youcode.YouQuiz.models.entities.QuizAssignmentEntity;
 
 @Getter
@@ -20,7 +20,7 @@ public class StudentAnswerDto {
     private Double score;
 
     @NotNull
-    private QuestionAnswerEntity questionAnswerEntity;
+    private ValidAnswerEntity questionAnswerEntity;
 
     @NotNull
     private QuizAssignmentEntity quizAssignmentEntity;

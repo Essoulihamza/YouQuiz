@@ -5,34 +5,34 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import ma.youcode.YouQuiz.models.dto.TrainerDto;
-import ma.youcode.YouQuiz.models.entities.TrainerEntity;
+import ma.youcode.YouQuiz.models.dto.MediaDto;
+import ma.youcode.YouQuiz.models.entities.MediaEntity;
 import ma.youcode.YouQuiz.models.mappers.Mapper;
-import ma.youcode.YouQuiz.repositories.TrainerRepositoty;
-import ma.youcode.YouQuiz.services.interfaces.TrainerService;
+import ma.youcode.YouQuiz.repositories.MediaRepository;
+import ma.youcode.YouQuiz.services.interfaces.MediaService;
 
 @AllArgsConstructor
 
 @Service
-public class TrainerServiceImpl implements TrainerService {
-    
-    private final TrainerRepositoty repository;
-    private final Mapper<TrainerEntity, TrainerDto> mapper;
+public class MediaServiceImpl implements MediaService {
+
+    private final MediaRepository repository;
+    private final Mapper<MediaEntity, MediaDto> mapper;
 
     @Override
-    public TrainerDto save(TrainerDto dto) {
+    public MediaDto save(MediaDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'save'");
     }
 
     @Override
-    public List<TrainerDto> getAll() {
+    public List<MediaDto> getAll() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
     @Override
-    public TrainerDto update(Long identifier, TrainerDto dto) {
+    public MediaDto update(Long identifier, MediaDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
@@ -44,13 +44,13 @@ public class TrainerServiceImpl implements TrainerService {
     }
 
     @Override
-    public TrainerDto find(Long identifier) {
+    public MediaDto find(Long identifier) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'find'");
     }
 
     @Override
-    public TrainerDto partialUpdate(Long identifier, TrainerDto dto) {
+    public MediaDto partialUpdate(Long identifier, MediaDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'partialUpdate'");
     }
@@ -66,4 +66,5 @@ public class TrainerServiceImpl implements TrainerService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'deleteAll'");
     }
+    
 }
